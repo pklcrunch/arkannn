@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabungan Qurban - Yayasan Akselerasi Kompetensi Anak Negeri</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+'biru-dongker': '#1e3a8a',
+'hijau-lumut': '#65a30d',
+'hijau-lumut-light': '#84cc16'
+}
+}
+}
+}
+</script>
+<style>
+.gradient-bg {
+background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #65a30d 100%);
+}
+.card-hover {
+transition: all 0.3s ease;
+}
+.card-hover:hover {
+transform: translateY(-8px);
+box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+.pulse-animation {
+animation: pulse 2s infinite;
+}
+@keyframes pulse {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.05); }
+}
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-item {
+  flex: 0 0 33.333%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.carousel-item img {
+  width: 80%;
+  border-radius: 12px;
+  transition: transform 0.4s ease;
+}
+
+.carousel-item.center img {
+  transform: scale(1.2);
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  padding: 0.5em;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+.carousel-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: translateY(-50%) scale(1.1);
+}
+.carousel-track { display: flex; flex-wrap: nowrap; will-change: transform; }
+.carousel-item { flex: 0 0 33.3333333%; display:flex; justify-content:center; align-items:center; }
+.carousel-item img { width: 80%; border-radius: 12px; transition: transform .4s ease, opacity .4s ease; opacity:.7; }
+.carousel-item.center img { transform: scale(1.2); opacity: 1; }
+
+.carousel-btn.prev { left: 10px; }
+.carousel-btn.next { right: 10px; }
+</style>
+</head>
+<body class="bg-white">
+<!-- Header -->
+<header class="gradient-bg text-white py-6 shadow-lg">
+<div class="container mx-auto px-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+<span class="text-biru-dongker font-bold text-xl"><img src="VEKTOR LOGO AKAN-min (5).png" ></span>
+</div>
+<div>
+<h1 class="text-xl font-bold">Yayasan Akselerasi</h1>
+<p class="text-sm opacity-90">Kompetensi Anak Negeri</p>
+</div>
+</div>
+<nav class="hidden md:flex space-x-6">
+<a href="#beranda" class="hover:text-hijau-lumut-light transition-colors">Beranda</a>
+<a href="#paket" class="hover:text-hijau-lumut-light transition-colors">Paket Qurban</a>
+<a href="#tentang" class="hover:text-hijau-lumut-light transition-colors">Tentang</a>
+<a href="#kontak" class="hover:text-hijau-lumut-light transition-colors">Kontak</a>
+</nav>
+</div>
+</div>
+</header>
+
+<!-- Hero Section -->
+<section id="beranda" class="py-20 bg-gradient-to-br from-blue-50 to-green-50">
+<div class="container mx-auto px-4 text-center">
+<div class="max-w-4xl mx-auto">
+<h2 class="text-5xl font-bold text-biru-dongker mb-6">
+Ayo Tabung Qurban
+<div>
+<span class="text-hijau-lumut">Bareng AKAN ID 2026</span>
+</div>
+
+</h2>
+<p class="text-xl text-gray-700 mb-2 leading-relaxed">
+Qurban bareng AKAN ID bukan hanya ibadah, tapi juga membawa dampak nyata.
+</p>
+<p class="text-xl text-gray-700 leading-relaxed">
+Bareng-bareng kita wujudkan <strong>#QurbanUntukPemberdayaan</strong> 🌾
+</p>
+
+
+<div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+<button onclick="scrollToPackages()" class="pulse-animation bg-hijau-lumut hover:bg-hijau-lumut-light text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg transition-all duration-300 transform hover:scale-105">
+🐄 Mulai Tabungan Qurban Sekarang
+</button>
+<button onclick="scrollToAbout()" class="border-2 border-biru-dongker text-biru-dongker hover:bg-biru-dongker hover:text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300">
+Pelajari Lebih Lanjut
+</button>
+</div>
+
+<!-- Stats -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+<div class="bg-white p-6 rounded-xl shadow-lg">
+<div class="text-3xl font-bold text-hijau-lumut mb-2">293+</div>
+<div class="text-gray-600">Keluarga Terbantu</div>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-lg">
+<div class="text-3xl font-bold text-biru-dongker mb-2">6+</div>
+<div class="text-gray-600">Daerah Penyaluran</div>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-lg">
+<div class="text-3xl font-bold text-hijau-lumut mb-2">22+</div>
+<div class="text-gray-600">Peserta Aktif</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Paket Qurban -->
+<section id="paket" class="py-20 bg-white">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16">
+<h3 class="text-4xl font-bold text-biru-dongker mb-4">Pilihan Paket Tabungan Qurban</h3>
+<p class="text-xl text-gray-600 max-w-2xl mx-auto">
+Pilih paket yang sesuai dengan kemampuan Anda. Semua paket akan disalurkan kepada yang membutuhkan
+</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+<!-- Paket Hemat -->
+<div class="card-hover bg-white border-2 border-gray-200 rounded-2xl p-8 text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-hijau-lumut to-hijau-lumut-light"></div>
+<div class="text-6xl mb-4">🐐</div>
+<h4 class="text-2xl font-bold text-biru-dongker mb-4">Paket Hemat</h4>
+<div class="text-4xl font-bold text-hijau-lumut mb-2">Rp. 1.800.000</div>
+<p class="text-gray-600 mb-6">18-20 Kg</p>
+<ul class="text-left space-y-2 mb-8">
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Khusus disalurkan</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Hewan diawasi dokter	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Sertifikat Qurban</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Pemotongan Sesuai Syariat</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Dokumentasi</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> PGaransi hewan mati 100%	</li>
+</ul>
+<button onclick="selectPackage('Kambing', 1350000)" class="w-full bg-hijau-lumut hover:bg-hijau-lumut-light text-white py-3 rounded-full font-bold transition-all duration-300 transform hover:scale-105">
+Pilih Paket Ini
+</button>
+</div>
+
+<!-- Paket Standar	 -->
+<div class="card-hover bg-white border-2 border-hijau-lumut rounded-2xl p-8 text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-biru-dongker to-hijau-lumut"></div>
+<div class="absolute top-4 right-4 bg-hijau-lumut text-white px-3 py-1 rounded-full text-sm font-bold">POPULER</div>
+<div class="text-6xl mb-4">🐐</div>
+<h4 class="text-2xl font-bold text-biru-dongker mb-4">Paket Standar</h4>
+<div class="text-4xl font-bold text-hijau-lumut mb-2">Rp, 2.650.000	</div>
+<p class="text-gray-600 mb-6">21-25 Kg</p>
+<ul class="text-left space-y-2 mb-8">
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Khusus disalurkan</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Hewan diawasi dokter	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Sertifikat Qurbanp</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Pemotongan Sesuai Syariat</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Dokumentasi	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Garansi hewan mati 100%	</li>
+</ul>
+<button onclick="selectPackage('Sapi 1/7', 2500000)" class="w-full bg-hijau-lumut hover:bg-hijau-lumut-light text-white py-3 rounded-full font-bold transition-all duration-300 transform hover:scale-105">
+Pilih Paket Ini
+</button>
+</div>
+
+<!-- Paket Super -->
+<div class="card-hover bg-white border-2 border-gray-200 rounded-2xl p-8 text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-biru-dongker to-hijau-lumut"></div>
+<div class="text-6xl mb-4">🐐</div>
+<h4 class="text-2xl font-bold text-biru-dongker mb-4">Paket Super</h4>
+<div class="text-4xl font-bold text-hijau-lumut mb-2">Rp, 3.100.000	</div>
+<p class="text-gray-600 mb-6">26-30 Kg</p>
+<ul class="text-left space-y-2 mb-8">
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Hewan diawasi dokter	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Sertifikat Qurban</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Pemotongan Sesuai Syariat</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span>Garansi hewan mati 100%</li>
+</ul>
+<button onclick="selectPackage('Sapi Utuh', 6000000)" class="w-full bg-hijau-lumut hover:bg-hijau-lumut-light text-white py-3 rounded-full font-bold transition-all duration-300 transform hover:scale-105">
+Pilih Paket Ini
+</button>
+</div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+<!-- Paket Premium	 -->
+<div class="card-hover bg-white border-2 border-gray-200 rounded-2xl p-8 text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-hijau-lumut to-hijau-lumut-light"></div>
+<div class="text-6xl mb-4">🐐</div>
+<h4 class="text-2xl font-bold text-biru-dongker mb-4">Paket Premium	</h4>
+<div class="text-4xl font-bold text-hijau-lumut mb-2">Rp, 3.650.000	</div>
+<p class="text-gray-600 mb-6">31-40 Kg</p>
+<ul class="text-left space-y-2 mb-8">
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Hewan diawasi dokter	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span>Sertifikat Qurban	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Pemotongan Sesuai Syariat</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Garansi hewan mati 100%	</li>
+</ul>
+<button onclick="selectPackage('Kambing', 1350000)" class="w-full bg-hijau-lumut hover:bg-hijau-lumut-light text-white py-3 rounded-full font-bold transition-all duration-300 transform hover:scale-105">
+Pilih Paket Ini
+</button>
+</div>
+
+<!-- Paket Sultan	 -->
+<div class="card-hover bg-white border-2 border-hijau-lumut rounded-2xl p-8 text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-biru-dongker to-hijau-lumut"></div>
+<div class="absolute top-4 right-4 bg-hijau-lumut text-white px-3 py-1 rounded-full text-sm font-bold">POPULER</div>
+<div class="text-6xl mb-4">🐐</div>
+<h4 class="text-2xl font-bold text-biru-dongker mb-4">Paket Sultan	</h4>
+<div class="text-4xl font-bold text-hijau-lumut mb-2">Rp, 4.200.000	</div>
+<p class="text-gray-600 mb-6">40-45 Kg</p>
+<ul class="text-left space-y-2 mb-8">
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Hewan diawasi dokter	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Sertifikat Qurban	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Pemotongan Sesuai Syariat	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Garansi hewan mati 100%	</li>
+</ul>
+<button onclick="selectPackage('Sapi 1/7', 2500000)" class="w-full bg-hijau-lumut hover:bg-hijau-lumut-light text-white py-3 rounded-full font-bold transition-all duration-300 transform hover:scale-105">
+Pilih Paket Ini
+</button>
+</div>
+
+<!-- Paket Patungan Sapi	 -->
+<div class="card-hover bg-white border-2 border-gray-200 rounded-2xl p-8 text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-biru-dongker to-hijau-lumut"></div>
+<div class="text-6xl mb-4">🐮</div>
+<h4 class="text-2xl font-bold text-biru-dongker mb-4">Paket Patungan Sapi	</h4>
+<div class="text-4xl font-bold text-hijau-lumut mb-2">2.714.286</div>
+<p class="text-gray-600 mb-6">180-199 Kg</p>
+<ul class="text-left space-y-2 mb-8">
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Khusus disalurkan	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Hewan diawasi dokter	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Sertifikat Qurban	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Pemotongan Sesuai Syariat	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Garansi hewan mati 100%			</li>
+</ul>
+<button onclick="selectPackage('Sapi Utuh', 6000000)" class="w-full bg-hijau-lumut hover:bg-hijau-lumut-light text-white py-3 rounded-full font-bold transition-all duration-300 transform hover:scale-105">
+Pilih Paket Ini
+</button>
+</div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+<!-- Paket Sapi Grade C	 -->
+<div class="card-hover bg-white border-2 border-gray-200 rounded-2xl p-8 text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-hijau-lumut to-hijau-lumut-light"></div>
+<div class="text-6xl mb-4">🐄</div>
+<h4 class="text-2xl font-bold text-biru-dongker mb-4">Paket Sapi Grade C	</h4>
+<div class="text-4xl font-bold text-hijau-lumut mb-2">Rp. 19.000.000	</div>
+<p class="text-gray-600 mb-6">200-230 Kg</p>
+<ul class="text-left space-y-2 mb-8">
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Hewan diawasi dokter	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Sertifikat Qurban	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Pemotongan Sesuai Syariat	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Garansi hewan mati 100%	</li>
+</ul>
+<button onclick="selectPackage('Kambing', 1350000)" class="w-full bg-hijau-lumut hover:bg-hijau-lumut-light text-white py-3 rounded-full font-bold transition-all duration-300 transform hover:scale-105">
+Pilih Paket Ini
+</button>
+</div>
+
+<!-- Paket Sapi Grade B	 -->
+<div class="card-hover bg-white border-2 border-hijau-lumut rounded-2xl p-8 text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-biru-dongker to-hijau-lumut"></div>
+<div class="absolute top-4 right-4 bg-hijau-lumut text-white px-3 py-1 rounded-full text-sm font-bold">POPULER</div>
+<div class="text-6xl mb-4">🐄</div>
+<h4 class="text-2xl font-bold text-biru-dongker mb-4">Paket Sapi Grade B	</h4>
+<div class="text-4xl font-bold text-hijau-lumut mb-2">Rp. 22.800.000	</div>
+<p class="text-gray-600 mb-6">240-260 Kg</p>
+<ul class="text-left space-y-2 mb-8">
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Hewan diawasi dokter	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Sertifikat Qurban	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Pemotongan Sesuai Syariat</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Garansi hewan mati 100%		</li>
+</ul>
+<button onclick="selectPackage('Sapi 1/7', 2500000)" class="w-full bg-hijau-lumut hover:bg-hijau-lumut-light text-white py-3 rounded-full font-bold transition-all duration-300 transform hover:scale-105">
+Pilih Paket Ini
+</button>
+</div>
+
+<!-- Paket Sapi Grade A	 -->
+<div class="card-hover bg-white border-2 border-gray-200 rounded-2xl p-8 text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-biru-dongker to-hijau-lumut"></div>
+<div class="text-6xl mb-4">🐮</div>
+<h4 class="text-2xl font-bold text-biru-dongker mb-4">Paket Sapi Grade A	</h4>
+<div class="text-4xl font-bold text-hijau-lumut mb-2">Rp. 25.650.000	</div>
+<p class="text-gray-600 mb-6">270-300 Kg</p>
+<ul class="text-left space-y-2 mb-8">
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Hewan diawasi dokter	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Sertifikat Qurban	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Pemotongan Sesuai Syariat	</li>
+<li class="flex items-center"><span class="text-hijau-lumut mr-2">✓</span> Garansi hewan mati 100%	</li>
+</ul>
+<button onclick="selectPackage('Sapi Utuh', 6000000)" class="w-full bg-hijau-lumut hover:bg-hijau-lumut-light text-white py-3 rounded-full font-bold transition-all duration-300 transform hover:scale-105">
+Pilih Paket Ini
+</button>
+</div>
+</div>
+
+<!-- CTA Besar -->
+<div class="text-center mt-16">
+<div class="bg-gradient-to-r from-biru-dongker to-hijau-lumut p-8 rounded-2xl text-white max-w-4xl mx-auto">
+<h4 class="text-3xl font-bold mb-4">🎯 Jangan Lewatkan Kesempatan Emas Ini!</h4>
+<p class="text-xl mb-6">Selalu menjadi smart buyer pastikan saya melakukan transaksi melalui Rek BSI An Yys. Akselerasi Kompetensi Anak No. 7184545459 (hati-hati atas segala tindak penipuan)</p>
+<button onclick="openRegistration()" class="pulse-animation bg-white text-biru-dongker px-10 py-4 rounded-full font-bold text-xl hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
+🚀 Daftar Sekarang & Dapatkan Bonus!
+</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Tentang -->
+<section id="tentang" class="py-20 bg-gradient-to-br from-blue-50 to-green-50">
+<div class="container mx-auto px-4">
+<div class="max-w-4xl mx-auto">
+<div class="text-center mb-16">
+<h3 class="text-4xl font-bold text-biru-dongker mb-4">💼 Program Tabungan Qurban AKAN ID:</h3>
+<p class="text-xl text-gray-600">
+Yayasan Akselerasi Kompetensi Anak Negeri berkomitmen menyalurkan qurban kepada yang membutuhkan
+</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<div>
+<h4 class="text-2xl font-bold text-biru-dongker mb-6">Mengapa Memilih Kami?</h4>
+<div class="space-y-4">
+<div class="flex items-start space-x-4">
+<div class="w-8 h-8 bg-hijau-lumut rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+<span class="text-white text-sm">✓</span>
+</div>
+<div>
+<h5 class="font-bold text-biru-dongker"> Ringan & fleksibel</h5>
+<p class="text-gray-600"></p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-8 h-8 bg-hijau-lumut rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+<span class="text-white text-sm">✓</span>
+</div>
+<div>
+<h5 class="font-bold text-biru-dongker">✅Transparan & amanah</h5>
+<p class="text-gray-600"> </p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-8 h-8 bg-hijau-lumut rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+<span class="text-white text-sm">✓</span>
+</div>
+<div>
+<h5 class="font-bold text-biru-dongker">Qurbanmu disalurkan tepat sasaran</h5>
+<p class="text-gray-600"></p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-8 h-8 bg-hijau-lumut rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+<span class="text-white text-sm">✓</span>
+</div>
+<div>
+<h5 class="font-bold text-biru-dongker">Sekaligus bantu pemberdayaan masyarakat</h5>
+<p class="text-gray-600"></p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-8 h-8 bg-hijau-lumut rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+<span class="text-white text-sm">✓</span>
+</div>
+<div>
+<h5 class="font-bold text-biru-dongker">Ongkir (Estimasi by lalamove)</h5>
+<p class="text-gray-600">**untuk paket lainnya juga dapat dengan senang hati kami disalurkan ke Lansia, Janda, warga pra sejahtera yang tidak mendapat daging qurban serta elemen masyarakat lainnya yang berhak menerima.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white p-8 rounded-2xl shadow-lg">
+<h4 class="text-2xl font-bold text-biru-dongker mb-6 text-center">Proses Mudah</h4>
+<div class="space-y-6">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 bg-hijau-lumut text-white rounded-full flex items-center justify-center font-bold">1</div>
+<div>
+<h5 class="font-bold">Pilih Paket</h5>
+<p class="text-gray-600 text-sm">Tentukan paket sesuai kemampuan</p>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 bg-hijau-lumut text-white rounded-full flex items-center justify-center font-bold">2</div>
+<div>
+<h5 class="font-bold"> Daftar dan Bergabung ke Grup WA</h5>
+<p class="text-gray-600 text-sm">Isi formulir dan Menabung Sesuai kemampuan</p>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 bg-hijau-lumut text-white rounded-full flex items-center justify-center font-bold">3</div>
+<div>
+<h5 class="font-bold">Terima Laporan</h5>
+<p class="text-gray-600 text-sm">Dapatkan dokumentasi penyaluran</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Kontak -->
+<section id="kontak" class="py-20 bg-white">
+<div class="container mx-auto px-4">
+<div class="max-w-4xl mx-auto text-center">
+    <section id="documentation" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-navy-dark mb-4">Dokumentasi Kegiatan</h2>
+      <div class="section-divider w-24 mx-auto mb-6"></div>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Galeri foto dan video dari berbagai kegiatan dan program yang telah kami laksanakan
+      </p>
+    </div>
+
+    <div class="carousel-container">
+      <button class="carousel-btn prev">&#10094;</button>
+      <div class="carousel-track">
+        <!-- 12 gambar -->
+        <div class="carousel-item"><img src="8.jpg" alt=""></div>
+        <div class="carousel-item"><img src="9.jpg" alt=""></div>
+        <div class="carousel-item"><img src="21.jpg" alt=""></div>
+        <div class="carousel-item"><img src="22.jpg" alt=""></div>
+        <div class="carousel-item"><img src="23.jpg" alt=""></div>
+        <div class="carousel-item"><img src="24.jpg" alt=""></div>
+        <div class="carousel-item"><img src="25.jpg" alt=""></div>
+        <div class="carousel-item"><img src="26.jpg" alt=""></div>
+        <div class="carousel-item"><img src="27.jpg" alt=""></div>
+        <div class="carousel-item"><img src="28.jpg" alt=""></div>
+        <div class="carousel-item"><img src="29.jpg" alt=""></div>
+        <div class="carousel-item"><img src="30.jpg" alt=""></div>
+        <div class="carousel-item"><img src="31.jpg" alt=""></div>
+        <div class="carousel-item"><img src="32.jpg" alt=""></div>
+        <div class="carousel-item"><img src="33.jpg" alt=""></div>
+        <div class="carousel-item"><img src="Untitled design (4).jpg.jpg" alt=""></div>
+      </div>
+      <button class="carousel-btn next">&#10095;</button>
+    </div>
+  </div>
+</section>
+<h3 class="text-4xl font-bold text-biru-dongker mb-4">Hubungi Kami</h3>
+<p class="text-xl text-gray-600 mb-12">
+Tim kami siap membantu Anda dalam program tabungan qurban
+</p>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+<div class="bg-gradient-to-br from-blue-50 to-green-50 p-6 rounded-xl">
+<div class="text-3xl mb-4">📱</div>
+<h4 class="font-bold text-biru-dongker mb-2">WhatsApp</h4>
+<p class="text-gray-600">+62 877-1477-7039</p>
+</div>
+<div class="bg-gradient-to-br from-blue-50 to-green-50 p-6 rounded-xl">
+<div class="text-3xl mb-4">📧</div>
+<h4 class="font-bold text-biru-dongker mb-2">Email</h4>
+<p class="text-gray-600">akselkanindonesia@gmail.com</p>
+</div>
+<div class="bg-gradient-to-br from-blue-50 to-green-50 p-6 rounded-xl">
+<div class="text-3xl mb-4">📍</div>
+<h4 class="font-bold text-biru-dongker mb-2">Alamat</h4>
+<p class="text-gray-600">Jalan Cempedak Raya No.22, Leuwinanggung, Kec. Tapos, Kota Depok, Jawa Barat 16456</p>
+</div>
+</div>
+
+<div class="bg-gradient-to-r from-hijau-lumut to-hijau-lumut-light p-8 rounded-2xl text-white">
+<h4 class="text-2xl font-bold mb-4">⏰ Buruan! Pendaftaran Terbatas</h4>
+<p class="text-lg mb-6">Hanya tersisa beberapa slot untuk periode qurban tahun ini</p>
+<button onclick="openUrgentRegistration()" class="pulse-animation bg-white text-hijau-lumut px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
+🔥 Daftar Sebelum Kehabisan!
+</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="gradient-bg text-white py-12">
+<div class="container mx-auto px-4">
+<div class="text-center">
+<div class="flex items-center justify-center space-x-3 mb-6">
+<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+<span class="text-biru-dongker font-bold text-xl"><img src="VEKTOR LOGO AKAN-min (5).png"></span>
+</div>
+<div>
+<h5 class="text-xl font-bold">Yayasan Akselerasi</h5>
+<p class="text-sm opacity-90">Kompetensi Anak Negeri</p>
+</div>
+</div>
+<p class="text-lg mb-4">Mewujudkan qurban berkah untuk sesama</p>
+<p class="opacity-75">© 2025 Yayasan Akselerasi Kompetensi Anak Negeri. Semua hak dilindungi.</p>
+</div>
+</div>
+</footer>
+
+<!-- Modal Pendaftaran -->
+<div id="registrationModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+<div class="bg-white rounded-2xl p-8 max-w-md w-full max-h-[90vh] overflow-y-auto">
+<div class="text-center mb-6">
+<h4 class="text-2xl font-bold text-biru-dongker mb-2">Daftar Tabungan Qurban</h4>
+<p class="text-gray-600">Isi data diri Anda untuk memulai</p>
+</div>
+
+<form id="registrationForm" class="space-y-4">
+<div>
+<label class="block text-sm font-bold text-biru-dongker mb-2">Nama Lengkap</label>
+<input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:border-hijau-lumut focus:outline-none" placeholder="Masukkan nama lengkap">
+</div>
+<div>
+<label class="block text-sm font-bold text-biru-dongker mb-2">Nomor WhatsApp</label>
+<input type="tel" class="w-full p-3 border border-gray-300 rounded-lg focus:border-hijau-lumut focus:outline-none" placeholder="08xxxxxxxxxx">
+</div>
+<div>
+<label class="block text-sm font-bold text-biru-dongker mb-2">Email</label>
+<input type="email" class="w-full p-3 border border-gray-300 rounded-lg focus:border-hijau-lumut focus:outline-none" placeholder="email@example.com">
+</div>
+<div>
+<label class="block text-sm font-bold text-biru-dongker mb-2">Paket Dipilih</label>
+<input type="text" id="selectedPackage" class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100" readonly>
+</div>
+<div>
+<label class="block text-sm font-bold text-biru-dongker mb-2">Alamat</label>
+<textarea class="w-full p-3 border border-gray-300 rounded-lg focus:border-hijau-lumut focus:outline-none" rows="3" placeholder="Alamat lengkap"></textarea>
+</div>
+
+<div class="flex space-x-4 pt-4">
+<button type="button" onclick="closeModal()" class="flex-1 border border-gray-300 text-gray-600 py-3 rounded-lg font-bold hover:bg-gray-50 transition-colors">
+Batal
+</button>
+<button type="submit" class="flex-1 bg-hijau-lumut text-white py-3 rounded-lg font-bold hover:bg-hijau-lumut-light transition-colors">
+Daftar Sekarang
+</button>
+</div>
+</form>
+</div>
+</div>
+s
+<script>
+function scrollToPackages() {
+document.getElementById('paket').scrollIntoView({ behavior: 'smooth' });
+}
+
+function scrollToAbout() {
+document.getElementById('tentang').scrollIntoView({ behavior: 'smooth' });
+}
+
+function selectPackage(packageName, price) {
+document.getElementById('selectedPackage').value = `${packageName} - Rp ${price.toLocaleString('id-ID')}`;
+openRegistration();
+}
+
+function openRegistration() {
+document.getElementById('registrationModal').classList.remove('hidden');
+document.getElementById('registrationModal').classList.add('flex');
+document.body.style.overflow = 'hidden';
+}
+
+function openUrgentRegistration() {
+openRegistration();
+}
+
+function closeModal() {
+document.getElementById('registrationModal').classList.add('hidden');
+document.getElementById('registrationModal').classList.remove('flex');
+document.body.style.overflow = 'auto';
+}
+
+// Handle form submission
+document.getElementById('registrationForm').addEventListener('submit', function(e) {
+e.preventDefault();
+
+// Simulate form submission
+const submitButton = e.target.querySelector('button[type="submit"]');
+const originalText = submitButton.textContent;
+submitButton.textContent = 'Mendaftar...';
+submitButton.disabled = true;
+
+setTimeout(() => {
+alert('🎉 Pendaftaran berhasil! Tim kami akan menghubungi Anda dalam 24 jam untuk konfirmasi pembayaran.');
+closeModal();
+document.getElementById('registrationForm').reset();
+submitButton.textContent = originalText;
+submitButton.disabled = false;
+}, 2000);
+});
+
+// Close modal when clicking outside
+document.getElementById('registrationModal').addEventListener('click', function(e) {
+if (e.target === this) {
+closeModal();
+}
+});
+
+// Smooth scrolling for navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({ behavior: 'smooth' });
+}
+});
+});
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96e5e76b566f9a70',t:'MTc1NTA2MzkwMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+
+<script>
+(() => {
+  const track = document.querySelector('.carousel-track');
+  let items = Array.from(track.children);
+  const prevBtn = document.querySelector('.carousel-btn.prev');
+  const nextBtn = document.querySelector('.carousel-btn.next');
+
+  const VISIBLE = 3;
+  const ITEM_PERCENT = 100 / VISIBLE;
+
+  // Duplikat semua item di kiri & kanan
+  items.forEach(item => {
+    const cloneFront = item.cloneNode(true);
+    const cloneBack = item.cloneNode(true);
+    track.appendChild(cloneFront);
+    track.insertBefore(cloneBack, items[0]);
+  });
+
+  // Refresh items
+  items = Array.from(track.children);
+
+  // Mulai di tengah data
+  let currentIndex = items.length / 2;
+  let isTransitioning = false;
+
+  function setTransform(noAnim = false) {
+    track.style.transition = noAnim ? 'none' : 'transform 0.5s ease';
+    track.style.transform = `translateX(-${(currentIndex - 1) * ITEM_PERCENT}%)`;
+  }
+
+  function highlightCenter() {
+    items.forEach(el => el.classList.remove('center'));
+    if (items[currentIndex]) items[currentIndex].classList.add('center');
+  }
+
+  function goNext() {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    currentIndex++;
+    setTransform();
+    highlightCenter();
+  }
+
+  function goPrev() {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    currentIndex--;
+    setTransform();
+    highlightCenter();
+  }
+
+  nextBtn.addEventListener('click', goNext);
+  prevBtn.addEventListener('click', goPrev);
+
+  track.addEventListener('transitionend', () => {
+    isTransitioning = false;
+
+    const REAL_COUNT = items.length / 3; // aslinya sebelum cloning
+    if (currentIndex <= VISIBLE) {
+      // Lompat ke tengah tanpa animasi
+      currentIndex += REAL_COUNT;
+      setTransform(true);
+      highlightCenter();
+    }
+    if (currentIndex >= items.length - VISIBLE) {
+      currentIndex -= REAL_COUNT;
+      setTransform(true);
+      highlightCenter();
+    }
+  });
+  // Scroll pakai mouse wheel
+const carouselContainer = document.querySelector('.carousel-container');
+carouselContainer.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  if (e.deltaY > 0) {
+    goNext();
+  } else {
+    goPrev();
+  }
+});
+
+
+  // Init
+  setTransform(true);
+  highlightCenter();
+})();
+</script>
